@@ -1,5 +1,5 @@
 import { Button } from "devextreme-react";
-
+import "./App.css";
 function App() {
   return (
     <>
