@@ -21,7 +21,16 @@ function App() {
       price: Math.floor(Math.random() * 100),
     }));
   }, []);
-
+  const printGridData = async () => {
+    const gridInstance = gridRef.current?.instance;
+    // const gridItems = gridInstance?.getDataSource()?.items();
+    const gridStore = gridInstance?.getDataSource()?.store();
+    const loadedGridItems = await gridStore?.load();
+    if (Array.isArray(loadedGridItems)) {
+      console.log("Array.length: ", loadedGridItems.length);
+      console.table(loadedGridItems);
+    }
+  };
   return (
     <>
       <div className="grid-wrapper">
@@ -38,7 +47,12 @@ function App() {
           <Toolbar>
             {/* SAVE BUTTON */}
             <Item location="before">
-              <Button icon="save" type="default" stylingMode="contained" />
+              <Button
+                icon="save"
+                type="default"
+                stylingMode="contained"
+                onClick={printGridData}
+              />
             </Item>
             {/* NEW ROW BUTTON */}
             <Item name="addRowButton" />
